@@ -32,6 +32,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env
 
+#tempory ignor
+/src/lib/kv.ts
+/src/lib/notifs.ts
+
 # vercel
 .vercel
 

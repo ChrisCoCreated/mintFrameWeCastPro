@@ -13,7 +13,7 @@ import {
 	useConnect,
 	useSendTransaction,
 } from "thirdweb/react";
-import { shortenAddress } from "thirdweb/utils";
+// import { shortenAddress } from "thirdweb/utils";
 import { EIP1193 } from "thirdweb/wallets";
 import { Button } from "~/components/Button";
 import { ThirdwebClient } from "~/constants";
@@ -164,7 +164,7 @@ export default function App() {
 							)}
 						</div>
 					</div>
-					<div className="w-full flex justify-center items-center text-center">
+					{/* <div className="w-full flex justify-center items-center text-center">
 						{context?.user.displayName ? (
 							<h1 className="text-2xl font-bold text-center">
 								{context?.user.displayName}
@@ -173,14 +173,14 @@ export default function App() {
 						) : (
 							<div className="animate-pulse w-36 m-auto h-8 bg-slate-800 rounded-md" />
 						)}
-					</div>
-					{account?.address && (
+					</div> */}
+					{/* {account?.address && (
 						<div className="w-full flex justify-center items-center text-center">
 							<p className="text-base text-slate-500">
 								{shortenAddress(account.address)}
 							</p>
 						</div>
-					)}
+					)} */}
 				</div>
 
 				<div className="flex justify-stretch flex-col gap-2">
