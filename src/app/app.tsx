@@ -44,6 +44,7 @@ export default function App() {
 	const [isHDChecked, setIsHDChecked] = useState(true);
 	const [hasLiked] = useState(true);
 	const [showReloadIcon, setShowReloadIcon] = useState(false);
+	const [imageSrc, setImageSrc] = useState("/images/WeCastPro.gif");
 
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -128,14 +129,13 @@ export default function App() {
 						<Image src="/images/WeCastPro_XSmall.jpg" alt="WeCastPro" className="w-full p-4" width={100} height={100} />
 						<div className="absolute inset-0 flex items-center justify-center">
 							<Image
-								src="/images/WeCastPro.gif"
+								src={imageSrc}
 								alt="WeCastPro gif"
 								className="w-full h-full object-cover"
 								width={100}
 								height={100}
-								onClick={(e) => {
-									const img = e.currentTarget;
-									img.src = `/images/WeCastPro_NoDelay.gif?${new Date().getTime()}`;
+								onClick={() => {
+									setImageSrc(`/images/WeCastPro_NoDelay.gif?${new Date().getTime()}`);
 									setShowReloadIcon(false);
 									setTimeout(() => {
 										setShowReloadIcon(true);
@@ -146,7 +146,7 @@ export default function App() {
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									className="absolute bottom-2 right-2 h-6 w-6 text-white opacity-50"
-									fill="none"
+									fill="currentColor"
 									viewBox="0 0 489.533 489.533" 
 									stroke="currentColor"
 									strokeWidth={2}
