@@ -146,7 +146,7 @@ export default function App() {
 	useEffect(() => {
 		const fetchData = async () => {
 			const result = await checkUserLikedCast('0x3063a48af2bf4eb918e5466b2ab6756fa97bc179', '4163', '5701');
-			setUserLikedCast(result?.liked ?? null);
+			setUserLikedCast(result?.data?.reactionBody?.type === 'REACTION_TYPE_LIKE' ? true : false);
 		};
 		fetchData();
 	}, []);
