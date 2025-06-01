@@ -111,6 +111,12 @@ export default function App() {
 		return () => clearTimeout(timer);
 	}, []);
 
+	useEffect(() => {
+		if (!isHDChecked) {
+			setMintQuantity(BigInt(1));
+		}
+	}, [isHDChecked]);
+
 	const handleButtonClick = () => {
 		setTransactionErrorToken0(null);
 		setTransactionErrorToken1(null);
@@ -344,27 +350,29 @@ export default function App() {
 									</a>
 								</p>
 							)}
-							<div className="flex items-center gap-2">
-								<button
-									className="bg-gray-700 text-white px-2 py-1 rounded"
-									onClick={() => {
-										handleButtonClick();
-										setMintQuantity((prev) => prev > BigInt(1) ? prev - BigInt(1) : BigInt(1));
-									}}
-								>
-									-
-								</button>
-								<span className="text-white">{mintQuantity.toString()}</span>
-								<button
-									className="bg-gray-700 text-white px-2 py-1 rounded"
-									onClick={() => {
-										handleButtonClick();
-										setMintQuantity((prev) => prev < MAX_MINT_QUANTITY ? prev + BigInt(1) : prev);
-									}}
-								>
-									+
-								</button>
-							</div>
+							{isHDChecked && (
+								<div className="flex items-center gap-2">
+									<button
+										className="bg-gray-700 text-white px-2 py-1 rounded"
+										onClick={() => {
+											handleButtonClick();
+											setMintQuantity((prev) => prev > BigInt(1) ? prev - BigInt(1) : BigInt(1));
+										}}
+									>
+										-
+									</button>
+									<span className="text-white">{mintQuantity.toString()}</span>
+									<button
+										className="bg-gray-700 text-white px-2 py-1 rounded"
+										onClick={() => {
+											handleButtonClick();
+											setMintQuantity((prev) => prev < MAX_MINT_QUANTITY ? prev + BigInt(1) : prev);
+										}}
+									>
+										+
+									</button>
+								</div>
+							)}
 						</>
 					)}
 				</div>
