@@ -128,7 +128,7 @@ export default function App() {
 						<Image src="/images/WeCastPro_XSmall.jpg" alt="WeCastPro" className="w-full p-4" width={100} height={100} />
 						<div className="absolute inset-0 flex items-center justify-center">
 							<Image
-								src="/images/WeCastPro_NoDelay.gif"
+								src="/images/WeCastPro.gif"
 								alt="WeCastPro gif"
 								className="w-full h-full object-cover"
 								width={100}
