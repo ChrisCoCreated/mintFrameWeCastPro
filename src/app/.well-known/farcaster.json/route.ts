@@ -14,7 +14,7 @@ export async function GET() {
       name: "WeCastPro Mint",
       iconUrl: `${appUrl}/icon.png`,
       homeUrl: appUrl,
-      imageUrl: `${appUrl}/images/WeCastPro.gif`,
+      imageUrl: `${appUrl}/frame.png`,
       buttonTitle: "Mint",
       splashImageUrl: `${appUrl}/splash.png`,
       splashBackgroundColor: "#0f172a",
