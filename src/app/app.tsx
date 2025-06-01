@@ -129,8 +129,8 @@ export default function App() {
 
 	return (
 		<main className="bg-slate-900 h-screen w-screen text-white">
-			<div className="w-[300px] mx-auto py-4 px-2 pt-32">
-				<div className="flex flex-col items-center gap-2 mb-8">
+			<div className="w-[300px] mx-auto py-4 px-2 pt-16">
+				<div className="flex flex-col items-center gap-2 mb-4">
 					<div className="relative w-full mb-8">
 						<Image src="/images/WeCastPro_XSmall.jpg" alt="WeCastPro" className="w-full p-4" width={100} height={100} />
 						<div className="absolute inset-0 flex items-center justify-center">
