@@ -17,6 +17,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(500).json({ message: 'API key is missing' });
   }
 
+  console.log('Received request with method:', req.method);
+  console.log('Query parameters:', { target_hash, target_fid, fid });
+  console.log('Using API key:', apiKey ? 'Present' : 'Missing');
+
   try {
     const response = await fetch(`https://hub-api.neynar.com/v1/reactionById?reaction_type=${reaction_type}&target_hash=${target_hash}&target_fid=${target_fid}&fid=${fid}`, {
       headers: {
@@ -29,6 +33,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const data = await response.json();
+    console.log('Received response from API');
+    console.log('Sending response with data:', data);
     res.status(200).json(data);
   } catch (error) {
     console.error('Error checking if user liked cast:', error);
