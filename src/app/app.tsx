@@ -80,7 +80,7 @@ export default function App() {
 				const imgElement = document.createElement('img');
 				imgElement.src = context.user.pfpUrl;
 				imgElement.onload = () => {
-					const resolution = isHDChecked ? 96 : 48;
+					const resolution = isHDChecked ? 96 : 24;
 				
 					// Create an offscreen canvas to downscale if needed
 					const offscreen = document.createElement('canvas');
@@ -359,14 +359,30 @@ export default function App() {
 					)}
 				</div>
 				<div className="flex justify-center mt-4">
-					<Button
+					<a
 						onClick={() => {
-							sdk.actions.openUrl('https://d391b93f5f62d9c15f67142e43841acc.ipfscdn.io/ipfs/QmV67MbiP3c3ADTKK9FyCEr7Gcwdh3JrR68t1fKJsMYvGT/0.jpeg');
+							sdk.actions.openUrl('https://ipfs.io/ipfs/QmV67MbiP3c3ADTKK9FyCEr7Gcwdh3JrR68t1fKJsMYvGT/0.jpeg');
 						}}
-						className="bg-blue-500 text-white px-4 py-2 rounded"
+						className="text-blue-500 underline cursor-pointer px-4 py-2"
 					>
-						Explore Artwork
-					</Button>
+						Explore Artwork HD
+					</a>
+					<a
+						onClick={() => {
+							sdk.actions.openUrl('https://ipfs.io/ipfs/QmdwMawNRtWMkQoYXrMEjsFnW7DQRm84gV7X84hbK1gkbK/1.jpg');
+						}}
+						className="text-blue-500 underline cursor-pointer px-4 py-2"
+					>
+						Explore Artwork SD
+					</a>
+					<a
+						onClick={() => {
+							sdk.actions.openUrl('https://opensea.io/collection/wecast');
+						}}
+						className="text-blue-500 underline cursor-pointer px-4 py-2"
+					>
+						View OG WeCast April 2025
+					</a>
 				</div>
 			</div>
 			<style jsx>{`
