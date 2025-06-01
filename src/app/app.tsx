@@ -186,21 +186,23 @@ export default function App() {
 				</div>
 
 				<div className="flex justify-stretch flex-col gap-2">
-					<div className="flex justify-center items-center gap-2">
-						<label className="flex flex-col items-center gap-2 text-center">
+					<div className="flex justify-between items-center gap-2">
+						<div className="flex flex-col items-center gap-0 text-center">
 							<span className="text-lg font-bold">SD</span>
 							<span>Free Mint</span>
-							<span>Low Quality</span>
-							<input
-								type="checkbox"
-								checked={isHDChecked}
-								onChange={(e) => setIsHDChecked(e.target.checked)}
-								className="toggle-switch"
-							/>
+							<span>Low Qual</span>
+						</div>
+						<input
+							type="checkbox"
+							checked={isHDChecked}
+							onChange={(e) => setIsHDChecked(e.target.checked)}
+							className="toggle-switch"
+						/>
+						<div className="flex flex-col items-center gap-0 text-center">
 							<span className="text-lg font-bold">HD</span>
 							<span>Paid Mint</span>
-							<span>High Quality</span>
-						</label>
+							<span>High Qual</span>
+						</div>
 					</div>
 					{!wallet ? (
 						<Button disabled={!isSDKLoaded} onClick={connectWallet}>
