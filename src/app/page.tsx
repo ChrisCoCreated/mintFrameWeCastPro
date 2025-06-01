@@ -12,7 +12,7 @@ const frame = {
       type: "launch_frame",
       name: "WeCastPro Mint Page",
       url: appUrl,
-      splashImageUrl: `${appUrl}/images/WeCastPro.gif`,
+      splashImageUrl: `${appUrl}/splash.png`,
       splashBackgroundColor: "#0f172a",
     },
   },
