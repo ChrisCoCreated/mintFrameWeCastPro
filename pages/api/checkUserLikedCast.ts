@@ -5,16 +5,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  const { castId, creatorFid, userFid } = req.query;
+  const { target_hash, target_fid, fid } = req.query;
+  const reaction_type = 'Like'; // Hardcoded reaction type
 
-  if (!castId || !creatorFid || !userFid) {
+  if (!target_hash || !target_fid || !fid) {
     return res.status(400).json({ message: 'Missing required parameters' });
   }
 
+  const apiKey = process.env.NEYNAR_API_KEY;
+  if (!apiKey) {
+    return res.status(500).json({ message: 'API key is missing' });
+  }
+
   try {
-    const response = await fetch(`https://hub-api.neynar.com/v1/reactionById?castId=${castId}&creatorFid=${creatorFid}&userFid=${userFid}`, {
+    const response = await fetch(`https://hub-api.neynar.com/v1/reactionById?reaction_type=${reaction_type}&target_hash=${target_hash}&target_fid=${target_fid}&fid=${fid}`, {
       headers: {
-        'Authorization': `Bearer ${process.env.NEYNAR_API_KEY}`, // Use environment variable for API key
+        'x-api-key': apiKey, // Use environment variable for API key
       },
     });
 

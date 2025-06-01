@@ -45,6 +45,7 @@ export default function App() {
 	const [hasLiked] = useState(true);
 	const [showReloadIcon, setShowReloadIcon] = useState(false);
 	const [imageSrc, setImageSrc] = useState("/images/WeCastPro.gif");
+	const [userLikedCast, setUserLikedCast] = useState<boolean | null>(null);
 
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -126,6 +127,29 @@ export default function App() {
 		const url = `${baseScanUrl}${transactionHash}`;
 		await sdk.actions.openUrl(url);
 	};
+
+	const checkUserLikedCast = async (target_hash: string, target_fid: string, fid: string) => {
+		try {
+			const response = await fetch(`/api/checkUserLikedCast?target_hash=${target_hash}&target_fid=${target_fid}&fid=${fid}`);
+			if (!response.ok) {
+				throw new Error('Failed to check if user liked cast');
+			}
+			const data = await response.json();
+			return data;
+		} catch (error) {
+			console.error('Error in checkUserLikedCast:', error);
+			return null;
+		}
+	};
+
+	// Example usage
+	useEffect(() => {
+		const fetchData = async () => {
+			const result = await checkUserLikedCast('0x3063a48af2bf4eb918e5466b2ab6756fa97bc179', '4163', '5701');
+			setUserLikedCast(result?.liked ?? null);
+		};
+		fetchData();
+	}, []);
 
 	return (
 		<main className="bg-slate-900 h-screen w-screen text-white">
@@ -374,6 +398,13 @@ export default function App() {
 								</p>
 							)}
 						</>
+					)}
+				</div>
+				<div className="flex justify-center mt-4">
+					{userLikedCast !== null ? (
+						<p className="text-white">User liked cast: {userLikedCast ? 'Yes' : 'No'}</p>
+					) : (
+						<p className="text-white">Loading user like status...</p>
 					)}
 				</div>
 				<div className="flex justify-center mt-4">
