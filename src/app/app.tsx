@@ -220,50 +220,73 @@ export default function App() {
 								Disconnect Wallet
 							</Button> */}
 							{isHDChecked ? (
-								<Button
-									disabled={!isSDKLoaded || isPendingToken1}
-									onClick={async () => {
-										handleButtonClick();
-										setIsPendingToken1(true);
-										if (!account) {
-											alert("Minting failed: No account connected");
-											return;
-										}
+								<div className="flex items-center gap-2 w-full">
+									<button
+										className="bg-gray-700 text-white flex-grow px-0 py-2 rounded text-sm"
+										style={{ aspectRatio: '1' }}
+										onClick={() => {
+											handleButtonClick();
+											setMintQuantity((prev) => prev > BigInt(1) ? prev - BigInt(1) : BigInt(1));
+										}}
+									>
+										-
+									</button>
+									<Button
+										className="flex-grow"
+										disabled={!isSDKLoaded || isPendingToken1}
+										onClick={async () => {
+											handleButtonClick();
+											setIsPendingToken1(true);
+											if (!account) {
+												alert("Minting failed: No account connected");
+												return;
+											}
 
-										if (wallet.getChain()?.id !== chain.id) {
-											await wallet.switchChain(chain);
-										}
+											if (wallet.getChain()?.id !== chain.id) {
+												await wallet.switchChain(chain);
+											}
 
-										const contract = getContract({
-											client: ThirdwebClient,
-											chain,
-											address: "0xC03b765c06880CFB5a439240aC863826292767A5",
-										});
+											const contract = getContract({
+												client: ThirdwebClient,
+												chain,
+												address: "0xC03b765c06880CFB5a439240aC863826292767A5",
+											});
 
-										const transaction = claimTo({
-											contract,
-											to: account.address,
-											tokenId: BigInt(1),
-											quantity: mintQuantity,
-										});
+											const transaction = claimTo({
+												contract,
+												to: account.address,
+												tokenId: BigInt(1),
+												quantity: mintQuantity,
+											});
 
-										sendTransaction(transaction, {
-											onSuccess: (data: TransactionResult) => {
-												setTransactionResultToken1(data);
-												console.log(`Transaction successful with hash: ${data.transactionHash}`);
-											},
-											onError: (error: Error) => {
-												setTransactionErrorToken1(error);
-												console.error("Transaction failed", error);
-											},
-											onSettled: () => {
-												setIsPendingToken1(false);
-											},
-										});
-									}}
-								>
-									{isPendingToken1 ? "Minting HD..." : `HD Mint ${(0.002 * Math.min(Number(mintQuantity), 5)).toFixed(3)}ETH`}
-								</Button>
+											sendTransaction(transaction, {
+												onSuccess: (data: TransactionResult) => {
+													setTransactionResultToken1(data);
+													console.log(`Transaction successful with hash: ${data.transactionHash}`);
+												},
+												onError: (error: Error) => {
+													setTransactionErrorToken1(error);
+													console.error("Transaction failed", error);
+												},
+												onSettled: () => {
+													setIsPendingToken1(false);
+												},
+											});
+										}}
+									>
+										{isPendingToken1 ? "Minting HD..." : `HD Mint ${(0.002 * Math.min(Number(mintQuantity), 5)).toFixed(3)}ETH`}
+									</Button>
+									<button
+										className="bg-gray-700 text-white flex-grow px-0 py-2 rounded text-sm"
+										style={{ aspectRatio: '1' }}
+										onClick={() => {
+											handleButtonClick();
+											setMintQuantity((prev) => prev < MAX_MINT_QUANTITY ? prev + BigInt(1) : prev);
+										}}
+									>
+										+
+									</button>
+								</div>
 							) : (
 								<Button
 									disabled={!isSDKLoaded || isPendingToken0 || !hasLiked}
@@ -350,29 +373,6 @@ export default function App() {
 									</a>
 								</p>
 							)}
-							{isHDChecked && (
-								<div className="flex items-center gap-2">
-									<button
-										className="bg-gray-700 text-white px-2 py-1 rounded"
-										onClick={() => {
-											handleButtonClick();
-											setMintQuantity((prev) => prev > BigInt(1) ? prev - BigInt(1) : BigInt(1));
-										}}
-									>
-										-
-									</button>
-									<span className="text-white">{mintQuantity.toString()}</span>
-									<button
-										className="bg-gray-700 text-white px-2 py-1 rounded"
-										onClick={() => {
-											handleButtonClick();
-											setMintQuantity((prev) => prev < MAX_MINT_QUANTITY ? prev + BigInt(1) : prev);
-										}}
-									>
-										+
-									</button>
-								</div>
-							)}
 						</>
 					)}
 				</div>
@@ -385,21 +385,24 @@ export default function App() {
 					>
 						Explore Artwork HD
 					</a>
+					<span className="text-white mx-1 text-2xl">|</span>
 					<a
 						onClick={() => {
 							sdk.actions.openUrl('https://ipfs.io/ipfs/QmdwMawNRtWMkQoYXrMEjsFnW7DQRm84gV7X84hbK1gkbK/1.jpg');
 						}}
 						className="text-blue-500 underline cursor-pointer px-4 py-2"
 					>
-						Explore Artwork SD
+						SD
 					</a>
+				</div>
+				<div className="flex justify-center mt-2">
 					<a
 						onClick={() => {
 							sdk.actions.openUrl('https://opensea.io/collection/wecast');
 						}}
-						className="text-blue-500 underline cursor-pointer px-4 py-2"
+						className="text-gray-400 underline cursor-pointer px-4 py-2 text-sm"
 					>
-						View OG WeCast April 2025
+						View OG WeCast April 2023
 					</a>
 				</div>
 			</div>
