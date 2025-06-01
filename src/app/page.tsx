@@ -7,12 +7,12 @@ const frame = {
   version: "next",
   imageUrl: `${appUrl}/frame.png`,
   button: {
-    title: "Launch Frame",
+    title: "Mint [Free/Paid]",
     action: {
       type: "launch_frame",
-      name: "Thirdweb Frames Starter",
+      name: "WeCastPro Mint Page",
       url: appUrl,
-      splashImageUrl: `${appUrl}/splash.png`,
+      splashImageUrl: `${appUrl}/images/WeCastPro.gif`,
       splashBackgroundColor: "#0f172a",
     },
   },
@@ -22,10 +22,10 @@ export const revalidate = 300;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Thirdweb Frames Starter",
+    title: "WeCastPro Mint Page",
     openGraph: {
-      title: "Thirdweb Frames Starter",
-      description: "A Thirdweb frames starter app.",
+      title: "WeCastPro Mint Page",
+      description: "The mint page for WeCastPro from ChrisCoCreated",
     },
     other: {
       "fc:frame": JSON.stringify(frame),

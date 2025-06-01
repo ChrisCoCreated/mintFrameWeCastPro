@@ -188,14 +188,18 @@ export default function App() {
 				<div className="flex justify-stretch flex-col gap-2">
 					<div className="flex justify-center items-center gap-2">
 						<label className="flex flex-col items-center gap-2 text-center">
-							<span>SD [Free Mint] Low Quality</span>
+							<span className="text-lg font-bold">SD</span>
+							<span>Free Mint</span>
+							<span>Low Quality</span>
 							<input
 								type="checkbox"
 								checked={isHDChecked}
 								onChange={(e) => setIsHDChecked(e.target.checked)}
 								className="toggle-switch"
 							/>
-							<span>HD [Paid Mint] High Quality</span>
+							<span className="text-lg font-bold">HD</span>
+							<span>Paid Mint</span>
+							<span>High Quality</span>
 						</label>
 					</div>
 					{!wallet ? (
