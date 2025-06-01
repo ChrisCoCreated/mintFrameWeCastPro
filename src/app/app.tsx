@@ -21,6 +21,8 @@ import { claimTo } from "thirdweb/extensions/erc1155";
 
 type TransactionResult = { transactionHash: string };
 
+const MAX_MINT_QUANTITY = BigInt(5);
+
 export default function App() {
 	const [isSDKLoaded, setIsSDKLoaded] = useState(false);
 	const [context, setContext] = useState<Context.FrameContext>();
@@ -184,16 +186,18 @@ export default function App() {
 				</div>
 
 				<div className="flex justify-stretch flex-col gap-2">
-					<label className="flex items-center gap-2">
-						<span>SD</span>
-						<input
-							type="checkbox"
-							checked={isHDChecked}
-							onChange={(e) => setIsHDChecked(e.target.checked)}
-							className="toggle-switch"
-						/>
-						<span>HD</span>
-					</label>
+					<div className="flex justify-center items-center gap-2">
+						<label className="flex flex-col items-center gap-2 text-center">
+							<span>SD [Free Mint] Low Quality</span>
+							<input
+								type="checkbox"
+								checked={isHDChecked}
+								onChange={(e) => setIsHDChecked(e.target.checked)}
+								className="toggle-switch"
+							/>
+							<span>HD [Paid Mint] High Quality</span>
+						</label>
+					</div>
 					{!wallet ? (
 						<Button disabled={!isSDKLoaded} onClick={connectWallet}>
 							{status === "connecting" ? "Connecting..." : "Connect Wallet"}
@@ -246,7 +250,7 @@ export default function App() {
 										});
 									}}
 								>
-									{isPendingToken1 ? "Minting Token 1..." : "HD Mint 0.002ETH Token 1"}
+									{isPendingToken1 ? "Minting HD..." : `HD Mint ${(0.002 * Math.min(Number(mintQuantity), 5)).toFixed(3)}ETH`}
 								</Button>
 							) : (
 								<Button
@@ -291,7 +295,7 @@ export default function App() {
 										});
 									}}
 								>
-									{isPendingToken0 ? "Minting Token 0..." : hasLiked ? "FreeMint Token 0" + {hasLiked}: "Like to Mint"}
+									{isPendingToken0 ? "Minting SD..." : hasLiked ? "FreeMint SD" : "Like to Mint SD"}
 								</Button>
 							)}
 							{transactionErrorToken0 && (
@@ -339,7 +343,7 @@ export default function App() {
 									className="bg-gray-700 text-white px-2 py-1 rounded"
 									onClick={() => {
 										handleButtonClick();
-										setMintQuantity((prev) => prev > BigInt(1) ? prev - BigInt(1) : prev);
+										setMintQuantity((prev) => prev > BigInt(1) ? prev - BigInt(1) : BigInt(1));
 									}}
 								>
 									-
@@ -349,7 +353,7 @@ export default function App() {
 									className="bg-gray-700 text-white px-2 py-1 rounded"
 									onClick={() => {
 										handleButtonClick();
-										setMintQuantity((prev) => prev + BigInt(1));
+										setMintQuantity((prev) => prev < MAX_MINT_QUANTITY ? prev + BigInt(1) : prev);
 									}}
 								>
 									+
