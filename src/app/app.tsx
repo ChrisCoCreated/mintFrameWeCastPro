@@ -299,9 +299,13 @@ export default function App() {
 								</div>
 							) : (
 								<Button
-									disabled={!isSDKLoaded || isPendingToken0 || !userLikedCast}
+									disabled={!isSDKLoaded || isPendingToken0}
 									onClick={async () => {
 										handleButtonClick();
+										if (!userLikedCast) {
+											await sdk.actions.openUrl(LIKE_CAST_URL);
+											return;
+										}
 										setIsPendingToken0(true);
 										if (!account) {
 											alert("Minting failed: No account connected");
