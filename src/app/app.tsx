@@ -205,7 +205,10 @@ export default function App() {
 
 				<div className="flex justify-stretch flex-col gap-4">
 					<div className="flex justify-between items-center gap-2">
-						<div className="flex flex-col items-center gap-0 text-center">
+						<div
+							className="flex flex-col items-center gap-0 text-center"
+							onClick={() => setIsHDChecked(false)}
+						>
 							<span className="text-lg font-bold">SD</span>
 							<span className="text-sm text-slate-400">Free Mint</span>
 							<span className="text-sm text-slate-400">Small PFPs</span>
@@ -216,7 +219,9 @@ export default function App() {
 							onChange={(e) => setIsHDChecked(e.target.checked)}
 							className="toggle-switch align-top"
 						/>
-						<div className="flex flex-col items-center gap-0 text-center">
+						<div className="flex flex-col items-center gap-0 text-center"
+						onClick={() => setIsHDChecked(true)}
+						>
 							<span className="text-lg font-bold">HD</span>
 							<span className="text-sm text-slate-400">Paid Mint</span>
 							<span className="text-sm text-slate-400">Large PFPs</span>
