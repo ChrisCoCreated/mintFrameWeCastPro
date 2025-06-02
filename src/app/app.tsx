@@ -234,7 +234,7 @@ export default function App() {
 								<div className="flex items-center gap-2 w-full">
 									<button
 										className="bg-gray-700 text-white flex-grow px-0 py-2 rounded text-xl"
-										style={{ aspectRatio: '1', height: '48px' }}
+										style={{height: '48px' }}
 										onClick={() => {
 											handleButtonClick();
 											setMintQuantity((prev) => prev > BigInt(1) ? prev - BigInt(1) : BigInt(1));
@@ -244,7 +244,7 @@ export default function App() {
 									</button>
 									<Button
 										className="flex-grow"
-										style={{ height: '48px', width: '150px' }}
+										style={{ height: '48px', width: '200px' }}
 										disabled={!isSDKLoaded || isPendingToken1}
 										onClick={async () => {
 											handleButtonClick();
@@ -290,7 +290,7 @@ export default function App() {
 									</Button>
 									<button
 										className="bg-gray-700 text-white flex-grow px-0 py-2 rounded text-xl"
-										style={{ aspectRatio: '1', height: '48px' }}
+										style={{ height: '48px' }}
 										onClick={() => {
 											handleButtonClick();
 											setMintQuantity((prev) => prev < MAX_MINT_QUANTITY ? prev + BigInt(1) : prev);
