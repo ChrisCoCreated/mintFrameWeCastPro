@@ -387,11 +387,11 @@ export default function App() {
 					)}
 				</div>
 				<div className="flex justify-center mt-4">
-					{userLikedCast !== false || userLikedCast !== null ? (
-						<a href={LIKE_CAST_URL} className="text-white underline">Like cast for free SD mint</a>
-					) : (
+					{userLikedCast === null ? (
 						<p className="text-white">Loading user like status...</p>
-					)}
+					) : userLikedCast === false ? (
+						<a onClick={() => sdk.actions.openUrl(LIKE_CAST_URL)} className="text-white underline cursor-pointer">Like cast for free SD mint</a>
+					) : null}
 				</div>
 				<div className="flex justify-center mt-4">
 					<a
