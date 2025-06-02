@@ -42,7 +42,6 @@ export default function App() {
 	const [isPendingToken0, setIsPendingToken0] = useState(false);
 	const [isPendingToken1, setIsPendingToken1] = useState(false);
 	const [isHDChecked, setIsHDChecked] = useState(true);
-	const [hasLiked] = useState(true);
 	const [showReloadIcon, setShowReloadIcon] = useState(false);
 	const [imageSrc, setImageSrc] = useState("/images/WeCastPro.gif");
 	const [userLikedCast, setUserLikedCast] = useState<boolean | null>(null);
@@ -196,23 +195,6 @@ export default function App() {
 							)}
 						</div>
 					</div>
-					{/* <div className="w-full flex justify-center items-center text-center">
-						{context?.user.displayName ? (
-							<h1 className="text-2xl font-bold text-center">
-								{context?.user.displayName}
-								{isHDChecked ? "HD" : "SD"}
-							</h1>
-						) : (
-							<div className="animate-pulse w-36 m-auto h-8 bg-slate-800 rounded-md" />
-						)}
-					</div> */}
-					{/* {account?.address && (
-						<div className="w-full flex justify-center items-center text-center">
-							<p className="text-base text-slate-500">
-								{shortenAddress(account.address)}
-							</p>
-						</div>
-					)} */}
 				</div>
 
 				<div className="flex justify-stretch flex-col gap-2">
@@ -313,7 +295,7 @@ export default function App() {
 								</div>
 							) : (
 								<Button
-									disabled={!isSDKLoaded || isPendingToken0 || !hasLiked}
+									disabled={!isSDKLoaded || isPendingToken0 || !userLikedCast}
 									onClick={async () => {
 										handleButtonClick();
 										setIsPendingToken0(true);
@@ -354,7 +336,7 @@ export default function App() {
 										});
 									}}
 								>
-									{isPendingToken0 ? "Minting SD..." : hasLiked ? "FreeMint SD" : "Like to Mint SD"}
+									{isPendingToken0 ? "Minting SD..." : userLikedCast ? "FreeMint SD" : "Like to Mint SD"}
 								</Button>
 							)}
 							{transactionErrorToken0 && (
