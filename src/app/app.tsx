@@ -22,6 +22,10 @@ import { claimTo } from "thirdweb/extensions/erc1155";
 type TransactionResult = { transactionHash: string };
 
 const MAX_MINT_QUANTITY = BigInt(5);
+const TARGET_HASH = '0x3063a48af2bf4eb918e5466b2ab6756fa97bc179';
+const TARGET_FID = '4163';
+const FID = '5701';
+const LIKE_CAST_URL = 'https://farcaster.xyz/kmacb.eth/0x3063a48a';
 
 export default function App() {
 	const [isSDKLoaded, setIsSDKLoaded] = useState(false);
@@ -144,7 +148,7 @@ export default function App() {
 	// Example usage
 	useEffect(() => {
 		const fetchData = async () => {
-			const result = await checkUserLikedCast('0x3063a48af2bf4eb918e5466b2ab6756fa97bc179', '4163', '5701');
+			const result = await checkUserLikedCast(TARGET_HASH, TARGET_FID, FID);
 			setUserLikedCast(result?.data?.reactionBody?.type === 'REACTION_TYPE_LIKE' ? true : false);
 		};
 		fetchData();
@@ -383,8 +387,8 @@ export default function App() {
 					)}
 				</div>
 				<div className="flex justify-center mt-4">
-					{userLikedCast !== null ? (
-						<p className="text-white">User liked cast: {userLikedCast ? 'Yes' : 'No'}</p>
+					{userLikedCast !== false || userLikedCast !== null ? (
+						<a href={LIKE_CAST_URL} className="text-white underline">Like cast for free SD mint</a>
 					) : (
 						<p className="text-white">Loading user like status...</p>
 					)}
@@ -411,7 +415,7 @@ export default function App() {
 				<div className="flex justify-center mt-2">
 					<a
 						onClick={() => {
-							sdk.actions.openUrl('https://opensea.io/collection/wecast');
+							sdk.actions.openUrl('https://opensea.io/item/ethereum/0x9da2b6a88625be110e6da0eb7ed106ac88f6211d/1');
 						}}
 						className="text-gray-400 underline cursor-pointer px-4 py-2 text-sm"
 					>
