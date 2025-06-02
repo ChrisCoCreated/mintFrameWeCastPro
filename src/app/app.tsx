@@ -101,9 +101,10 @@ export default function App() {
 					}
 				
 					// Now draw to main canvas at 96x96
-					canvas.width = 96;
-					canvas.height = 96;
-					ctx.drawImage(offscreen, 0, 0, 96, 96);
+					const size = isHDChecked ? 96 : 24;
+					canvas.width = size;
+					canvas.height = size;
+					ctx.drawImage(offscreen, 0, 0, size, size);
 				};
 			}
 		}
