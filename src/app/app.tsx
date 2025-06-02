@@ -425,7 +425,7 @@ export default function App() {
 						onClick={() => {
 							sdk.actions.openUrl('https://ipfs.io/ipfs/QmdwMawNRtWMkQoYXrMEjsFnW7DQRm84gV7X84hbK1gkbK/1.jpg');
 						}}
-						className="text-blue-500 underline cursor-pointer px-4 py-2"
+						className="text-purple-500 underline cursor-pointer px-4"
 					>
 						SD
 					</a>
