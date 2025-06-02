@@ -422,7 +422,7 @@ export default function App() {
 					>
 						Explore Artwork HD
 					</a>
-					<span className="text-white mx-1 text-2xl">|</span>
+					<span className="text-white mx-1 text-2xl align-middle">|</span>
 					<a
 						onClick={() => {
 							sdk.actions.openUrl('https://ipfs.io/ipfs/QmdwMawNRtWMkQoYXrMEjsFnW7DQRm84gV7X84hbK1gkbK/1.jpg');
