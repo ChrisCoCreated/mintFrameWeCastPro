@@ -9,7 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@farcaster/frame-sdk": "^0.0.31",
+		"@farcaster/frame-sdk": "^0.0.53",
 		"next": "^15",
 		"react": "^19",
 		"react-dom": "^19",
