@@ -49,6 +49,7 @@ export default function App() {
 	const [showReloadIcon, setShowReloadIcon] = useState(false);
 	const [imageSrc, setImageSrc] = useState("/images/WeCastPro.gif");
 	const [userLikedCast, setUserLikedCast] = useState<boolean | null>(null);
+	const [isCheckingLikeStatus, setIsCheckingLikeStatus] = useState(false);
 
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -304,7 +305,12 @@ export default function App() {
 									onClick={async () => {
 										handleButtonClick();
 										if (!userLikedCast) {
+											setIsCheckingLikeStatus(true);
 											await sdk.actions.openUrl(LIKE_CAST_URL);
+											// Re-check the like status
+											const result = await checkUserLikedCast(TARGET_HASH, TARGET_FID, FID);
+											setUserLikedCast(result?.data?.reactionBody?.type === 'REACTION_TYPE_LIKE' ? true : false);
+											setIsCheckingLikeStatus(false);
 											return;
 										}
 										setIsPendingToken0(true);
@@ -345,7 +351,7 @@ export default function App() {
 										});
 									}}
 								>
-									{isPendingToken0 ? "Minting SD..." : userLikedCast ? "FreeMint SD" : "Like to Mint SD"}
+									{isPendingToken0 ? "Minting SD..." : isCheckingLikeStatus ? "Check Like Status" : userLikedCast === true ? "FreeMint SD" : "Like to Mint SD"}
 								</Button>
 							)}
 							{transactionErrorToken0 && (
