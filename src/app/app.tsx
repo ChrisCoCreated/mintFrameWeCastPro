@@ -194,7 +194,7 @@ export default function App() {
 						</div>
 						<div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
 							{context?.user.pfpUrl ? (
-								<canvas ref={canvasRef} className="object-cover size-full border-4 border-white" width={96} height={96} />
+								<canvas ref={canvasRef} className={`object-cover size-full border-4 ${isHDChecked ? 'border-white' : 'border-purple-500'}`} width={96} height={96} />
 							) : (
 								<div className="flex items-center justify-center size-full bg-slate-800 animate-pulse rounded-full" />
 							)}
@@ -301,6 +301,8 @@ export default function App() {
 								</div>
 							) : (
 								<Button
+									className="flex-grow"
+									style={{ height: '48px'}}
 									disabled={!isSDKLoaded || isPendingToken0}
 									onClick={async () => {
 										handleButtonClick();
