@@ -304,9 +304,13 @@ export default function App() {
 									disabled={!isSDKLoaded || isPendingToken0}
 									onClick={async () => {
 										handleButtonClick();
-										if (!userLikedCast) {
+										if (!userLikedCast && !isCheckingLikeStatus) {
 											setIsCheckingLikeStatus(true);
 											await sdk.actions.openUrl(LIKE_CAST_URL);
+											return;
+										}
+										if (isCheckingLikeStatus) {
+	
 											// Re-check the like status
 											const result = await checkUserLikedCast(TARGET_HASH, TARGET_FID, FID);
 											setUserLikedCast(result?.data?.reactionBody?.type === 'REACTION_TYPE_LIKE' ? true : false);
