@@ -158,7 +158,7 @@ export default function App() {
 	return (
 		<main className="bg-slate-900 h-screen w-screen text-white">
 			<div className="w-[300px] mx-auto py-4 px-2 pt-16">
-				<div className="flex flex-col items-center gap-2 mb-4">
+				<div className="flex flex-col items-center gap-2">
 					<div className="relative w-full mb-8">
 						<Image src="/images/WeCastPro_XSmall.jpg" alt="WeCastPro" className="w-full p-4" width={100} height={100} />
 						<div className="absolute inset-0 flex items-center justify-center">
@@ -202,7 +202,7 @@ export default function App() {
 					</div>
 				</div>
 
-				<div className="flex justify-stretch flex-col gap-2">
+				<div className="flex justify-stretch flex-col gap-4">
 					<div className="flex justify-between items-center gap-2">
 						<div className="flex flex-col items-center gap-0 text-center">
 							<span className="text-lg font-bold">SD</span>
@@ -275,6 +275,7 @@ export default function App() {
 												onSuccess: (data: TransactionResult) => {
 													setTransactionResultToken1(data);
 													console.log(`Transaction successful with hash: ${data.transactionHash}`);
+													setIsHDChecked(true);
 												},
 												onError: (error: Error) => {
 													setTransactionErrorToken1(error);
@@ -346,6 +347,7 @@ export default function App() {
 											onSuccess: (data: TransactionResult) => {
 												setTransactionResultToken0(data);
 												console.log(`Transaction successful with hash: ${data.transactionHash}`);
+												setIsHDChecked(true);
 											},
 											onError: (error: Error) => {
 												setTransactionErrorToken0(error);
@@ -366,19 +368,32 @@ export default function App() {
 								</p>
 							)}
 							{transactionResultToken0 && (
-								<p className="text-green-500">
-									Sent tx:{" "}
-									<a
-										href="#"
-										onClick={(e) => {
-											e.preventDefault();
-											openTransactionUrl(transactionResultToken0.transactionHash);
+								<>
+									<p className="text-green-500">
+										Sent tx:{" "}
+										<a
+											href="#"
+											onClick={(e) => {
+												e.preventDefault();
+												openTransactionUrl(transactionResultToken0.transactionHash);
+											}}
+										>
+											{transactionResultToken0.transactionHash.slice(0, 6)}...
+											{transactionResultToken0.transactionHash.slice(-4)}
+										</a>
+									</p>
+									<button
+										className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+										onClick={async () => {
+											await sdk.actions.composeCast({ 
+												text,
+												embeds,
+											});
 										}}
 									>
-										{transactionResultToken0.transactionHash.slice(0, 6)}...
-										{transactionResultToken0.transactionHash.slice(-4)}
-									</a>
-								</p>
+										Share
+									</button>
+								</>
 							)}
 							{transactionErrorToken1 && (
 								<p className="text-red-500">
@@ -422,7 +437,7 @@ export default function App() {
 					>
 						Explore Artwork HD
 					</a>
-					<span className="text-white mx-1 text-2xl align-middle">|</span>
+					<span className="text-white mx-1 px-4 py-2">|</span>
 					<a
 						onClick={() => {
 							sdk.actions.openUrl('https://ipfs.io/ipfs/QmdwMawNRtWMkQoYXrMEjsFnW7DQRm84gV7X84hbK1gkbK/1.jpg');
