@@ -208,7 +208,7 @@ export default function App() {
 						<div className="flex flex-col items-center gap-0 text-center">
 							<span className="text-lg font-bold">SD</span>
 							<span className="text-sm text-slate-400">Free Mint</span>
-							<span className="text-sm text-slate-400">Pixelation</span>
+							<span className="text-sm text-slate-400">Small PFPs</span>
 						</div>
 						<input
 							type="checkbox"
@@ -219,7 +219,7 @@ export default function App() {
 						<div className="flex flex-col items-center gap-0 text-center">
 							<span className="text-lg font-bold">HD</span>
 							<span className="text-sm text-slate-400">Paid Mint</span>
-							<span className="text-sm text-slate-400">Sharp</span>
+							<span className="text-sm text-slate-400">Large PFPs</span>
 						</div>
 					</div>
 					{!wallet ? (
