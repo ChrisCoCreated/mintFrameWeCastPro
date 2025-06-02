@@ -194,7 +194,7 @@ export default function App() {
 						</div>
 						<div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
 							{context?.user.pfpUrl ? (
-								<canvas ref={canvasRef} className={`object-cover size-full border-4 ${isHDChecked ? 'border-white' : 'border-purple-500'}`} width={96} height={96} />
+								<canvas ref={canvasRef} className="object-cover size-full border-4 border-white" width={isHDChecked ? 96 : 24} height={isHDChecked ? 96 : 24} />
 							) : (
 								<div className="flex items-center justify-center size-full bg-slate-800 animate-pulse rounded-full" />
 							)}
@@ -385,7 +385,14 @@ export default function App() {
 									<button
 										className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
 										onClick={async () => {
-
+											if (!context) {
+												alert('Context is not initialized. Please try again later.');
+												return;
+											}
+											await sdk.actions.composeCast({ 
+												"text": "I just minted WeCastPro",
+												"embeds": [LIKE_CAST_URL]
+											});
 										}}
 									>
 										Share
@@ -398,19 +405,36 @@ export default function App() {
 								</p>
 							)}
 							{transactionResultToken1 && (
-								<p className="text-green-500">
-									Sent tx:{" "}
-									<a
-										href="#"
-										onClick={(e) => {
-											e.preventDefault();
-											openTransactionUrl(transactionResultToken1.transactionHash);
+								<>
+									<p className="text-green-500">
+										Sent tx:{" "}
+										<a
+											href="#"
+											onClick={(e) => {
+												e.preventDefault();
+												openTransactionUrl(transactionResultToken1.transactionHash);
+											}}
+										>
+											{transactionResultToken1.transactionHash.slice(0, 6)}...
+											{transactionResultToken1.transactionHash.slice(-4)}
+										</a>
+									</p>
+									<button
+										className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+										onClick={async () => {
+											if (!context) {
+												alert('Context is not initialized. Please try again later.');
+												return;
+											}
+											await sdk.actions.composeCast({ 
+												"text": "I just minted WeCastPro HD. 2 years on from the original WeCast from @chriscocreated",
+												"embeds": [LIKE_CAST_URL]
+											});
 										}}
 									>
-										{transactionResultToken1.transactionHash.slice(0, 6)}...
-										{transactionResultToken1.transactionHash.slice(-4)}
-									</a>
-								</p>
+										Share
+									</button>
+								</>
 							)}
 						</>
 					)}
