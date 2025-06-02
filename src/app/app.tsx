@@ -234,7 +234,7 @@ export default function App() {
 								<div className="flex items-center gap-2 w-full">
 									<button
 										className="bg-gray-700 text-white flex-grow px-0 py-2 rounded text-xl"
-										style={{height: '48px' }}
+										style={{ height: '48px', width: '48px' }}
 										onClick={() => {
 											handleButtonClick();
 											setMintQuantity((prev) => prev > BigInt(1) ? prev - BigInt(1) : BigInt(1));
@@ -290,7 +290,7 @@ export default function App() {
 									</Button>
 									<button
 										className="bg-gray-700 text-white flex-grow px-0 py-2 rounded text-xl"
-										style={{ height: '48px' }}
+										style={{ height: '48px', width: '48px' }}
 										onClick={() => {
 											handleButtonClick();
 											setMintQuantity((prev) => prev < MAX_MINT_QUANTITY ? prev + BigInt(1) : prev);
@@ -405,7 +405,10 @@ export default function App() {
 					{userLikedCast === null ? (
 						<p className="text-white">Loading user like status...</p>
 					) : userLikedCast === false ? (
-						<a onClick={() => sdk.actions.openUrl(LIKE_CAST_URL)} className="text-white underline cursor-pointer">Like cast for free SD mint</a>
+						<a onClick={() => {
+							setIsCheckingLikeStatus(true);
+							sdk.actions.openUrl(LIKE_CAST_URL);
+						}} className="text-white underline cursor-pointer">Like cast for free SD mint</a>
 					) : null}
 				</div>
 				<div className="flex justify-center mt-4">
@@ -413,7 +416,7 @@ export default function App() {
 						onClick={() => {
 							sdk.actions.openUrl('https://ipfs.io/ipfs/QmV67MbiP3c3ADTKK9FyCEr7Gcwdh3JrR68t1fKJsMYvGT/0.jpeg');
 						}}
-						className="text-blue-500 underline cursor-pointer px-4 py-2"
+						className="text-purple-500 underline cursor-pointer px-4 py-2"
 					>
 						Explore Artwork HD
 					</a>
