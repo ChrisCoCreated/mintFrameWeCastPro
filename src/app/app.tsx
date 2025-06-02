@@ -206,19 +206,19 @@ export default function App() {
 					<div className="flex justify-between items-center gap-2">
 						<div className="flex flex-col items-center gap-0 text-center">
 							<span className="text-lg font-bold">SD</span>
-							<span>Free Mint</span>
-							<span>Low Qual</span>
+							<span className="text-sm text-slate-400">Free Mint</span>
+							<span className="text-sm text-slate-400">Pixelation</span>
 						</div>
 						<input
 							type="checkbox"
 							checked={isHDChecked}
 							onChange={(e) => setIsHDChecked(e.target.checked)}
-							className="toggle-switch"
+							className="toggle-switch align-top"
 						/>
 						<div className="flex flex-col items-center gap-0 text-center">
 							<span className="text-lg font-bold">HD</span>
-							<span>Paid Mint</span>
-							<span>High Qual</span>
+							<span className="text-sm text-slate-400">Paid Mint</span>
+							<span className="text-sm text-slate-400">Sharp</span>
 						</div>
 					</div>
 					{!wallet ? (
