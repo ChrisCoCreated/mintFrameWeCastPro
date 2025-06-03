@@ -22,10 +22,10 @@ import { claimTo } from "thirdweb/extensions/erc1155";
 type TransactionResult = { transactionHash: string };
 
 const MAX_MINT_QUANTITY = BigInt(5);
-const TARGET_HASH = '0x3063a48af2bf4eb918e5466b2ab6756fa97bc179';
-const TARGET_FID = '4163';
+const TARGET_HASH = '0xd892004522158d6b4cc2e18642b66056a5e88fa6';
+const TARGET_FID = '5701';
 const FID = '5701';
-const LIKE_CAST_URL = 'https://farcaster.xyz/kmacb.eth/0x3063a48a';
+const LIKE_CAST_URL = 'https://farcaster.xyz/chriscocreated/0xd8920045';
 
 export default function App() {
 	const [isSDKLoaded, setIsSDKLoaded] = useState(false);
