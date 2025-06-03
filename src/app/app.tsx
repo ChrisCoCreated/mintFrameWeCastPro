@@ -27,9 +27,9 @@ const TARGET_HASH = '0xd892004522158d6b4cc2e18642b66056a5e88fa6';
 const TARGET_FID = '5701';
 const FID = '5701';
 const LIKE_CAST_URL = 'https://farcaster.xyz/chriscocreated/0xd8920045';
-const CONTRACT_ADDRESS = "0xC03b765c06880CFB5a439240aC863826292767A5";
-const FREE_MINT_TOKEN_ID = BigInt(0);
-const PAID_MINT_TOKEN_ID = BigInt(1);
+const CONTRACT_ADDRESS = "0x71423AF9132F5d33001dAc560Ab943ad4A503a66";
+const FREE_MINT_TOKEN_ID = BigInt(1);
+const PAID_MINT_TOKEN_ID = BigInt(0);
 
 export default function App() {
 	const [isSDKLoaded, setIsSDKLoaded] = useState(false);
