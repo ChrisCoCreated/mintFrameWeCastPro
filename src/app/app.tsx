@@ -28,10 +28,12 @@ const TARGET_FID = '5701';
 const FID = '5701';
 const LIKE_CAST_URL = 'https://farcaster.xyz/chriscocreated/0xd8920045';
 const CONTRACT_ADDRESS = "0x71423AF9132F5d33001dAc560Ab943ad4A503a66";
+//NB Update Testnet/Mainnet
 const FREE_MINT_TOKEN_ID = BigInt(1);
 const PAID_MINT_TOKEN_ID = BigInt(0);
 
 export default function App() {
+	const isTestnet = false; // Set to false for mainnet
 	const [isSDKLoaded, setIsSDKLoaded] = useState(false);
 	const [context, setContext] = useState<Context.FrameContext>();
 	const { connect } = useConnect();
@@ -44,7 +46,6 @@ export default function App() {
 	const [transactionResultToken1, setTransactionResultToken1] = useState<TransactionResult | null>(null);
 	const [transactionErrorToken1, setTransactionErrorToken1] = useState<Error | null>(null);
 	const [mintQuantity, setMintQuantity] = useState(BigInt(1));
-	const isTestnet = false; // Set to false for mainnet
 	const chain = isTestnet ? baseSepolia : base;
 	const baseScanUrl = isTestnet ? "https://sepolia.basescan.org/tx/" : "https://basescan.org/tx/";
 	const [isPendingToken0, setIsPendingToken0] = useState(false);
@@ -209,9 +210,9 @@ export default function App() {
 									strokeWidth={2}
 								>
 										<path d="M268.175,488.161c98.2-11,176.9-89.5,188.1-187.7c14.7-128.4-85.1-237.7-210.2-239.1v-57.6c0-3.2-4-4.9-6.7-2.9
-		l-118.6,87.1c-2,1.5-2,4.4,0,5.9l118.6,87.1c2.7,2,6.7,0.2,6.7-2.9v-57.5c87.9,1.4,158.3,76.2,152.3,165.6
-		c-5.1,76.9-67.8,139.3-144.7,144.2c-81.5,5.2-150.8-53-163.2-130c-2.3-14.3-14.8-24.7-29.2-24.7c-17.9,0-31.9,15.9-29.1,33.6
-		C49.575,418.961,150.875,501.261,268.175,488.161z"/>
+				l-118.6,87.1c-2,1.5-2,4.4,0,5.9l118.6,87.1c2.7,2,6.7,0.2,6.7-2.9v-57.5c87.9,1.4,158.3,76.2,152.3,165.6
+				c-5.1,76.9-67.8,139.3-144.7,144.2c-81.5,5.2-150.8-53-163.2-130c-2.3-14.3-14.8-24.7-29.2-24.7c-17.9,0-31.9,15.9-29.1,33.6
+				C49.575,418.961,150.875,501.261,268.175,488.161z"/>
 								</svg>
 							)}
 						</div>
@@ -343,7 +344,7 @@ export default function App() {
 											return;
 										}
 										if (isCheckingLikeStatus) {
-	
+
 											// Re-check the like status
 											const result = await checkUserLikedCast(TARGET_HASH, TARGET_FID, FID);
 											setUserLikedCast(result?.data?.reactionBody?.type === 'REACTION_TYPE_LIKE' ? true : false);
@@ -488,7 +489,7 @@ export default function App() {
 						}}
 						className="text-purple-500 underline cursor-pointer px-4 py-2"
 					>
-						Explore Artwork HD
+						View the Art in HD
 					</a>
 					<span className="text-white mx-1 px-4 py-2">|</span>
 					<a
