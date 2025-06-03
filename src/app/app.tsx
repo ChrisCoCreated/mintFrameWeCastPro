@@ -44,7 +44,7 @@ export default function App() {
 	const [transactionResultToken1, setTransactionResultToken1] = useState<TransactionResult | null>(null);
 	const [transactionErrorToken1, setTransactionErrorToken1] = useState<Error | null>(null);
 	const [mintQuantity, setMintQuantity] = useState(BigInt(1));
-	const isTestnet = true; // Set to false for mainnet
+	const isTestnet = false; // Set to false for mainnet
 	const chain = isTestnet ? baseSepolia : base;
 	const baseScanUrl = isTestnet ? "https://sepolia.basescan.org/tx/" : "https://basescan.org/tx/";
 	const [isPendingToken0, setIsPendingToken0] = useState(false);
