@@ -429,7 +429,7 @@ export default function App() {
 											}
 											await sdk.actions.composeCast({ 
 												"text": "I just minted WeCastPro from @chriscocreated - all 10k Pro + the FC team in the arch",
-												"embeds": [LIKE_CAST_URL]
+												"embeds": [LIKE_CAST_URL, "https://mint-frame-we-cast-pro.vercel.app"]
 											});
 										}}
 									>
@@ -474,7 +474,7 @@ export default function App() {
 											}
 											await sdk.actions.composeCast({ 
 												"text": "I just minted WeCastPro HD from @chriscocreated - all 10k Pro + the FC team in the arch - in High Definition",
-												"embeds": [LIKE_CAST_URL]
+												"embeds": [LIKE_CAST_URL, "https://mint-frame-we-cast-pro.vercel.app"]
 											});
 										}}
 									>
