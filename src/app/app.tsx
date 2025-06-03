@@ -397,7 +397,7 @@ export default function App() {
 										});
 									}}
 								>
-									{isPendingToken0 ? "Minting SD..." : isCheckingLikeStatus ? "Check Like Status" : userLikedCast === true ? "FreeMint SD" : "Like to Mint SD"}
+									{isPendingToken0 ? "Minting SD..." : isCheckingLikeStatus ? "Yes - I've liked the cast" : userLikedCast === true ? "FreeMint SD" : "Like Cast to Mint SD"}
 								</Button>
 							)}
 							{transactionErrorToken0 && (
