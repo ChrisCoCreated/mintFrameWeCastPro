@@ -5,7 +5,7 @@ const appUrl = process.env.NEXT_PUBLIC_URL;
 
 const frame = {
   version: "next",
-  imageUrl: `${appUrl}/WeCastHero.jpg`,
+  imageUrl: `${appUrl}/hero.jpg`,
   button: {
     title: "Free Mint",
     action: {
