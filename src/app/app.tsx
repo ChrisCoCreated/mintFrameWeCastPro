@@ -26,6 +26,9 @@ const TARGET_HASH = '0xd892004522158d6b4cc2e18642b66056a5e88fa6';
 const TARGET_FID = '5701';
 const FID = '5701';
 const LIKE_CAST_URL = 'https://farcaster.xyz/chriscocreated/0xd8920045';
+const CONTRACT_ADDRESS = "0xC03b765c06880CFB5a439240aC863826292767A5";
+const FREE_MINT_TOKEN_ID = BigInt(0);
+const PAID_MINT_TOKEN_ID = BigInt(1);
 
 export default function App() {
 	const [isSDKLoaded, setIsSDKLoaded] = useState(false);
@@ -40,7 +43,7 @@ export default function App() {
 	const [transactionResultToken1, setTransactionResultToken1] = useState<TransactionResult | null>(null);
 	const [transactionErrorToken1, setTransactionErrorToken1] = useState<Error | null>(null);
 	const [mintQuantity, setMintQuantity] = useState(BigInt(1));
-	const isTestnet = true; // Set to false for mainnet
+	const isTestnet = false; // Set to false for mainnet
 	const chain = isTestnet ? baseSepolia : base;
 	const baseScanUrl = isTestnet ? "https://sepolia.basescan.org/tx/" : "https://basescan.org/tx/";
 	const [isPendingToken0, setIsPendingToken0] = useState(false);
@@ -267,13 +270,13 @@ export default function App() {
 											const contract = getContract({
 												client: ThirdwebClient,
 												chain,
-												address: "0xC03b765c06880CFB5a439240aC863826292767A5",
+												address: CONTRACT_ADDRESS,
 											});
 
 											const transaction = claimTo({
 												contract,
 												to: account.address,
-												tokenId: BigInt(1),
+												tokenId: PAID_MINT_TOKEN_ID,
 												quantity: mintQuantity,
 											});
 
@@ -339,13 +342,13 @@ export default function App() {
 										const contract = getContract({
 											client: ThirdwebClient,
 											chain,
-											address: "0xC03b765c06880CFB5a439240aC863826292767A5",
+											address: CONTRACT_ADDRESS,
 										});
 
 										const transaction = claimTo({
 											contract,
 											to: account.address,
-											tokenId: BigInt(0),
+											tokenId: FREE_MINT_TOKEN_ID,
 											quantity: mintQuantity,
 										});
 
