@@ -155,7 +155,12 @@ export default function App() {
 	// Example usage
 	useEffect(() => {
 		const fetchData = async () => {
-			const result = await checkUserLikedCast(TARGET_HASH, TARGET_FID, FID);
+			if (!context || !context.user || !context.user.fid) {
+				console.error('User context or FID is not available');
+				return;
+			}
+			const userFID = context.user.fid.toString();
+			const result = await checkUserLikedCast(TARGET_HASH, TARGET_FID, userFID);
 			setUserLikedCast(result?.data?.reactionBody?.type === 'REACTION_TYPE_LIKE' ? true : false);
 		};
 		fetchData();
