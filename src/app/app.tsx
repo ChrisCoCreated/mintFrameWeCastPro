@@ -23,10 +23,10 @@ import { claimTo } from "thirdweb/extensions/erc1155";
 type TransactionResult = { transactionHash: string };
 
 const MAX_MINT_QUANTITY = BigInt(5);
-const TARGET_HASH = '0xd892004522158d6b4cc2e18642b66056a5e88fa6';
+const TARGET_HASH = '0x35a9ef791697af3d3999b25f02d3408a83eb8e17';
 const TARGET_FID = '5701';
 const FID = '5701';
-const LIKE_CAST_URL = 'https://farcaster.xyz/chriscocreated/0xd8920045';
+const LIKE_CAST_URL = 'https://farcaster.xyz/chriscocreated/0x35a9ef79';
 const CONTRACT_ADDRESS = "0x71423AF9132F5d33001dAc560Ab943ad4A503a66";
 //NB Update Testnet/Mainnet
 const FREE_MINT_TOKEN_ID = BigInt(1);
