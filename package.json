@@ -10,12 +10,14 @@
 	},
 	"dependencies": {
 		"@farcaster/frame-sdk": "^0.0.53",
+		"canvas-confetti": "^1.9.3",
 		"next": "^15",
 		"react": "^19",
 		"react-dom": "^19",
 		"thirdweb": "^5.93.4"
 	},
 	"devDependencies": {
+		"@types/canvas-confetti": "^1.9.0",
 		"@types/node": "^20",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",

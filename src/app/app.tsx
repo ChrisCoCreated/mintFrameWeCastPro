@@ -3,6 +3,7 @@
 import { type Context, sdk } from "@farcaster/frame-sdk";
 import { useCallback, useEffect, useState, useRef } from "react";
 import Image from 'next/image';
+import confetti from 'canvas-confetti';
 
 import { getContract } from "thirdweb";
 import { base, baseSepolia } from "thirdweb/chains";
@@ -159,6 +160,24 @@ export default function App() {
 		fetchData();
 	}, []);
 
+	const launchConfetti = () => {
+		confetti({
+			particleCount: 100,
+			spread: 70,
+			origin: { y: 0.6 },
+			shapes: ['circle'],
+			colors: ['#7c65c1'],
+			scalar: 1.2,
+			ticks: 200,
+			gravity: 0.5,
+			drift: 0.1,
+			startVelocity: 30,
+			angle: 90,
+			zIndex: 1000,
+			disableForReducedMotion: true,
+		});
+	};
+
 	return (
 		<main className="bg-slate-900 h-screen w-screen text-white">
 			<div className="w-[300px] mx-auto py-4 px-2 pt-16">
@@ -283,8 +302,10 @@ export default function App() {
 											sendTransaction(transaction, {
 												onSuccess: (data: TransactionResult) => {
 													setTransactionResultToken1(data);
+													setTransactionResultToken0(null);
 													console.log(`Transaction successful with hash: ${data.transactionHash}`);
 													setIsHDChecked(true);
+													launchConfetti();
 												},
 												onError: (error: Error) => {
 													setTransactionErrorToken1(error);
@@ -355,8 +376,10 @@ export default function App() {
 										sendTransaction(transaction, {
 											onSuccess: (data: TransactionResult) => {
 												setTransactionResultToken0(data);
+												setTransactionResultToken1(null);
 												console.log(`Transaction successful with hash: ${data.transactionHash}`);
 												setIsHDChecked(true);
+												launchConfetti();
 											},
 											onError: (error: Error) => {
 												setTransactionErrorToken0(error);
@@ -441,7 +464,7 @@ export default function App() {
 											});
 										}}
 									>
-										Share
+										Share HD
 									</button>
 								</>
 							)}
