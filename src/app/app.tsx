@@ -408,7 +408,7 @@ export default function App() {
 							{transactionResultToken0 && (
 								<>
 									<p className="text-green-500">
-										Sent tx:{" "}
+										Success:{" "}
 										<a
 											href="#"
 											onClick={(e) => {
@@ -445,7 +445,7 @@ export default function App() {
 							{transactionResultToken1 && (
 								<>
 									<p className="text-green-500">
-										Sent tx:{" "}
+										Success:{" "}
 										<a
 											href="#"
 											onClick={(e) => {
@@ -458,7 +458,15 @@ export default function App() {
 										</a>
 									</p>
 									<button
-										className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+										className="bg-purple-500 text-white px-4 py-2 rounded mt-1"
+										onClick={async () => {
+											sdk.actions.openUrl('https://ipfs.io/ipfs/QmV67MbiP3c3ADTKK9FyCEr7Gcwdh3JrR68t1fKJsMYvGT/0.jpeg');
+										}}
+									>
+										View Your Art
+									</button>
+									<button
+										className="bg-blue-500 text-white px-4 py-2 rounded mt-1"
 										onClick={async () => {
 											if (!context) {
 												alert('Context is not initialized. Please try again later.');
@@ -470,7 +478,7 @@ export default function App() {
 											});
 										}}
 									>
-										Share HD
+										Share
 									</button>
 								</>
 							)}
