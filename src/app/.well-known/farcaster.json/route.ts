@@ -25,11 +25,11 @@ export async function GET() {
       ],
       primaryCategory: "art-creativity",
       tags: ["social", "community", "art", "cocreated", "artifact"],
-      heroImageUrl: `${appUrl}/frame.png`,
+      heroImageUrl: `${appUrl}/WeCastHero.jpg`,
       tagline: "Mint a WeCastPro",
       ogTitle: "WeCastPro Mint",
       ogDescription: "Mint a WeCastPro",
-      ogImageUrl: `${appUrl}/frame.png`,
+      ogImageUrl: `${appUrl}/WeCastHero.jpg`,
       noindex: false
     },
   };
