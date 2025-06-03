@@ -7,10 +7,10 @@ const frame = {
   version: "next",
   imageUrl: `${appUrl}/frame.png`,
   button: {
-    title: "Mint [Free/Paid]",
+    title: "Free Mint",
     action: {
       type: "launch_frame",
-      name: "WeCastPro Mint Page",
+      name: "WeCastPro Mint",
       url: appUrl,
       splashImageUrl: `${appUrl}/splash.png`,
       splashBackgroundColor: "#0f172a",
@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "WeCastPro Mint Page",
     openGraph: {
       title: "WeCastPro Mint Page",
-      description: "The mint page for WeCastPro from ChrisCoCreated",
+      description: "Mint a WeCastPro from ChrisCoCreated",
     },
     other: {
       "fc:frame": JSON.stringify(frame),

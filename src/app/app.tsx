@@ -396,7 +396,7 @@ export default function App() {
 												return;
 											}
 											await sdk.actions.composeCast({ 
-												"text": "I just minted WeCastPro",
+												"text": "I just minted WeCastPro from @chriscocreated - all 10k Pro + the FC team in the arch",
 												"embeds": [LIKE_CAST_URL]
 											});
 										}}
@@ -433,7 +433,7 @@ export default function App() {
 												return;
 											}
 											await sdk.actions.composeCast({ 
-												"text": "I just minted WeCastPro HD. 2 years on from the original WeCast from @chriscocreated",
+												"text": "I just minted WeCastPro HD from @chriscocreated - all 10k Pro + the FC team in the arch - in High Definition",
 												"embeds": [LIKE_CAST_URL]
 											});
 										}}

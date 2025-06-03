@@ -14,10 +14,23 @@ export async function GET() {
       name: "WeCastPro Mint",
       iconUrl: `${appUrl}/icon.png`,
       homeUrl: appUrl,
-      imageUrl: `${appUrl}/frame.png`,
-      buttonTitle: "Mint",
       splashImageUrl: `${appUrl}/splash.png`,
       splashBackgroundColor: "#0f172a",
+      subtitle: "Mint a WeCastPro",
+      description: "Mint a WeCastPro",
+      screenshotUrls: [
+        `${appUrl}/screenshot1.png`,
+        `${appUrl}/screenshot2.png`,
+        `${appUrl}/screenshot3.png`
+      ],
+      primaryCategory: "art-creativity",
+      tags: ["social", "community", "art", "cocreated", "artifact"],
+      heroImageUrl: `${appUrl}/frame.png`,
+      tagline: "Mint a WeCastPro",
+      ogTitle: "WeCastPro Mint",
+      ogDescription: "Mint a WeCastPro",
+      ogImageUrl: `${appUrl}/frame.png`,
+      noindex: false
     },
   };
 
