@@ -306,11 +306,12 @@ export default function App() {
 											});
 
 											sendTransaction(transaction, {
-												onSuccess: (data: TransactionResult) => {
+												onSuccess: async (data: TransactionResult) => {
 													setTransactionResultToken1(data);
 													setTransactionResultToken0(null);
 													console.log(`Transaction successful with hash: ${data.transactionHash}`);
 													setIsHDChecked(true);
+													await sdk.haptics.impactOccurred('heavy');
 													launchConfetti();
 												},
 												onError: (error: Error) => {
@@ -380,11 +381,12 @@ export default function App() {
 										});
 
 										sendTransaction(transaction, {
-											onSuccess: (data: TransactionResult) => {
+											onSuccess: async (data: TransactionResult) => {
 												setTransactionResultToken0(data);
 												setTransactionResultToken1(null);
 												console.log(`Transaction successful with hash: ${data.transactionHash}`);
-												setIsHDChecked(true);
+												setIsHDChecked(true);												
+												await sdk.haptics.impactOccurred('heavy');
 												launchConfetti();
 											},
 											onError: (error: Error) => {

@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@farcaster/frame-sdk':
-        specifier: ^0.0.53
-        version: 0.0.53(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.24)
+        specifier: ^0.0.57
+        version: 0.0.57(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.24)
       canvas-confetti:
         specifier: ^1.9.3
         version: 1.9.3
@@ -189,11 +189,11 @@ packages:
     resolution: {integrity: sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
-  '@farcaster/frame-core@0.1.2':
-    resolution: {integrity: sha512-TSzIrCdeQKXq61cvk/ziNpEzH3r8QbDOYHOaPVR/N8e7l8abJWvYZ5cCgbgs8Rzqf/VkNmwJDI/61zfPI76KMQ==}
+  '@farcaster/frame-core@0.1.6':
+    resolution: {integrity: sha512-kSDFxCWvv6hdfmytVapWNX43nKs9SuDa6rQke/YESXPeGgsmlhymG+5Ses3H7gKXU9UfjXU1FIdlVN8fB3/yQw==}
 
-  '@farcaster/frame-sdk@0.0.53':
-    resolution: {integrity: sha512-R7p3w/oX7cf8Z4jQ+6NJYWJOpcbe2MUfzLBOOg1ZrLpBoOm2bbw0mZF0AxZTpzKnQVp0bJ17DAd8qTESAgdLqw==}
+  '@farcaster/frame-sdk@0.0.57':
+    resolution: {integrity: sha512-9607alCwGSu3pR5Ck9ZY7M+EbpmIRUvmJEdcg3gEHdsLQRarbGkm1qKll31xklnrVGUsgVkGBuZhiDbMSF+Zjw==}
 
   '@farcaster/quick-auth@0.0.5':
     resolution: {integrity: sha512-Z8hWz/7c33zlmII2AJHja/Wz0C03mm2o+CEBtBylmiun1wC4FMgx1Fal699VQvBUG1lpcJ662WxuRNxKogktDw==}
@@ -3704,7 +3704,7 @@ snapshots:
 
   '@eslint/js@8.57.1': {}
 
-  '@farcaster/frame-core@0.1.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)':
+  '@farcaster/frame-core@0.1.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)':
     dependencies:
       '@solana/web3.js': 1.98.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
       ox: 0.4.4(typescript@5.8.3)(zod@3.25.47)
@@ -3715,9 +3715,9 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@farcaster/frame-sdk@0.0.53(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.24)':
+  '@farcaster/frame-sdk@0.0.57(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.25.24)':
     dependencies:
-      '@farcaster/frame-core': 0.1.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
+      '@farcaster/frame-core': 0.1.6(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
       '@farcaster/quick-auth': 0.0.5(typescript@5.8.3)
       comlink: 4.4.2
       eventemitter3: 5.0.1

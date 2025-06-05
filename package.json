@@ -9,7 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@farcaster/frame-sdk": "^0.0.53",
+		"@farcaster/frame-sdk": "^0.0.57",
 		"canvas-confetti": "^1.9.3",
 		"next": "^15",
 		"react": "^19",
