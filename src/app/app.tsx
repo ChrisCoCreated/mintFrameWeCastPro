@@ -164,7 +164,7 @@ export default function App() {
 			setUserLikedCast(result?.data?.reactionBody?.type === 'REACTION_TYPE_LIKE' ? true : false);
 		};
 		fetchData();
-	}, []);
+	}, [context, context?.user?.fid]);
 
 	const launchConfetti = () => {
 		confetti({
