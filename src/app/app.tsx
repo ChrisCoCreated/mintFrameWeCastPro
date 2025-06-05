@@ -362,13 +362,12 @@ export default function App() {
 											disabled={!isSDKLoaded || isPendingToken0 || mintClosed}
 											onClick={async () => {
 												handleButtonClick();
-												if (!userLikedCast && !isCheckingLikeStatus) {
+												if (!mintClosed && !userLikedCast && !isCheckingLikeStatus) {
 													setIsCheckingLikeStatus(true);
 													await sdk.actions.openUrl(LIKE_CAST_URL);
 													return;
 												}
-												if (isCheckingLikeStatus) {
-
+												if (!mintClosed && isCheckingLikeStatus) {
 													// Re-check the like status
 													const result = await checkUserLikedCast(TARGET_HASH, TARGET_FID, FID);
 													setUserLikedCast(result?.data?.reactionBody?.type === 'REACTION_TYPE_LIKE' ? true : false);
