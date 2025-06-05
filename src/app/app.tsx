@@ -247,6 +247,7 @@ export default function App() {
 							onChange={(e) => {
 								setIsHDChecked(e.target.checked);
 								sdk.haptics.impactOccurred('light');
+								console.log('isHDChecked', isHDChecked);
 							}}
 							className="toggle-switch align-top"
 						/>
