@@ -244,7 +244,10 @@ export default function App() {
 						<input
 							type="checkbox"
 							checked={isHDChecked}
-							onChange={(e) => setIsHDChecked(e.target.checked)}
+							onChange={(e) => {
+								setIsHDChecked(e.target.checked);
+								sdk.haptics.impactOccurred('light');
+							}}
 							className="toggle-switch align-top"
 						/>
 						<div className="flex flex-col items-center gap-0 text-center"
