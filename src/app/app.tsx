@@ -55,6 +55,7 @@ export default function App() {
 	const [imageSrc, setImageSrc] = useState("/images/WeCastPro.gif");
 	const [userLikedCast, setUserLikedCast] = useState<boolean | null>(null);
 	const [isCheckingLikeStatus, setIsCheckingLikeStatus] = useState(false);
+	const [mintClosed] = useState(true);
 
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -259,233 +260,238 @@ export default function App() {
 							<span className="text-sm text-slate-400">Large PFPs</span>
 						</div>
 					</div>
-					{!wallet ? (
-						<Button disabled={!isSDKLoaded} onClick={connectWallet}>
-							{status === "connecting" ? "Connecting..." : "Connect Wallet"}
-						</Button>
+					{mintClosed ? (
+						<p className="text-red-500">Mint Closed</p>
 					) : (
 						<>
-							{/* <Button disabled={!isSDKLoaded} onClick={wallet.disconnect}>
-								Disconnect Wallet
-							</Button> */}
-							{isHDChecked ? (
-								<div className="flex items-center gap-2 w-full">
-									<button
-										className="bg-gray-700 text-white flex-grow px-0 py-2 rounded text-xl"
-										style={{ height: '48px', width: '48px' }}
-										onClick={() => {
-											handleButtonClick();
-											setMintQuantity((prev) => prev > BigInt(1) ? prev - BigInt(1) : BigInt(1));
-										}}
-									>
-										-
-									</button>
-									<Button
-										className="flex-grow"
-										style={{ height: '48px', width: '200px' }}
-										disabled={!isSDKLoaded || isPendingToken1}
-										onClick={async () => {
-											handleButtonClick();
-											setIsPendingToken1(true);
-											if (!account) {
-												alert("Minting failed: No account connected");
-												return;
-											}
-
-											if (wallet.getChain()?.id !== chain.id) {
-												await wallet.switchChain(chain);
-											}
-
-											const contract = getContract({
-												client: ThirdwebClient,
-												chain,
-												address: CONTRACT_ADDRESS,
-											});
-
-											const transaction = claimTo({
-												contract,
-												to: account.address,
-												tokenId: PAID_MINT_TOKEN_ID,
-												quantity: mintQuantity,
-											});
-
-											sendTransaction(transaction, {
-												onSuccess: async (data: TransactionResult) => {
-													setTransactionResultToken1(data);
-													setTransactionResultToken0(null);
-													console.log(`Transaction successful with hash: ${data.transactionHash}`);
-													setIsHDChecked(true);
-													await sdk.haptics.impactOccurred('heavy');
-													launchConfetti();
-												},
-												onError: (error: Error) => {
-													setTransactionErrorToken1(error);
-													console.error("Transaction failed", error);
-												},
-												onSettled: () => {
-													setIsPendingToken1(false);
-												},
-											});
-										}}
-									>
-										{isPendingToken1 ? "Minting HD..." : `HD Mint ${(0.002 * Math.min(Number(mintQuantity), 5)).toFixed(3)}ETH`}
-									</Button>
-									<button
-										className="bg-gray-700 text-white flex-grow px-0 py-2 rounded text-xl"
-										style={{ height: '48px', width: '48px' }}
-										onClick={() => {
-											handleButtonClick();
-											setMintQuantity((prev) => prev < MAX_MINT_QUANTITY ? prev + BigInt(1) : prev);
-										}}
-									>
-										+
-									</button>
-								</div>
-							) : (
-								<Button
-									className="flex-grow"
-									style={{ height: '48px'}}
-									disabled={!isSDKLoaded || isPendingToken0}
-									onClick={async () => {
-										handleButtonClick();
-										if (!userLikedCast && !isCheckingLikeStatus) {
-											setIsCheckingLikeStatus(true);
-											await sdk.actions.openUrl(LIKE_CAST_URL);
-											return;
-										}
-										if (isCheckingLikeStatus) {
-
-											// Re-check the like status
-											const result = await checkUserLikedCast(TARGET_HASH, TARGET_FID, FID);
-											setUserLikedCast(result?.data?.reactionBody?.type === 'REACTION_TYPE_LIKE' ? true : false);
-											setIsCheckingLikeStatus(false);
-											return;
-										}
-										setIsPendingToken0(true);
-										if (!account) {
-											alert("Minting failed: No account connected");
-											return;
-										}
-
-										if (wallet.getChain()?.id !== chain.id) {
-											await wallet.switchChain(chain);
-										}
-
-										const contract = getContract({
-											client: ThirdwebClient,
-											chain,
-											address: CONTRACT_ADDRESS,
-										});
-
-										const transaction = claimTo({
-											contract,
-											to: account.address,
-											tokenId: FREE_MINT_TOKEN_ID,
-											quantity: mintQuantity,
-										});
-
-										sendTransaction(transaction, {
-											onSuccess: async (data: TransactionResult) => {
-												setTransactionResultToken0(data);
-												setTransactionResultToken1(null);
-												console.log(`Transaction successful with hash: ${data.transactionHash}`);
-												setIsHDChecked(true);												
-												await sdk.haptics.impactOccurred('heavy');
-												launchConfetti();
-											},
-											onError: (error: Error) => {
-												setTransactionErrorToken0(error);
-												console.error("Transaction failed", error);
-											},
-											onSettled: () => {
-												setIsPendingToken0(false);
-											},
-										});
-									}}
-								>
-									{isPendingToken0 ? "Minting SD..." : isCheckingLikeStatus ? "Yes - I've liked the cast" : userLikedCast === true ? "FreeMint SD" : "Like Cast to Mint SD"}
+							{!wallet ? (
+								<Button disabled={!isSDKLoaded} onClick={connectWallet}>
+									{status === "connecting" ? "Connecting..." : "Connect Wallet"}
 								</Button>
-							)}
-							{transactionErrorToken0 && (
-								<p className="text-red-500">
-									{transactionErrorToken0.message}
-								</p>
-							)}
-							{transactionResultToken0 && (
+							) : (
 								<>
-									<p className="text-green-500">
-										Success:{" "}
-										<a
-											href="#"
-											onClick={(e) => {
-												e.preventDefault();
-												openTransactionUrl(transactionResultToken0.transactionHash);
+									{isHDChecked ? (
+										<div className="flex items-center gap-2 w-full">
+											<button
+												className="bg-gray-700 text-white flex-grow px-0 py-2 rounded text-xl"
+												style={{ height: '48px', width: '48px' }}
+												onClick={() => {
+													handleButtonClick();
+													setMintQuantity((prev) => prev > BigInt(1) ? prev - BigInt(1) : BigInt(1));
+												}}
+												disabled={mintClosed}
+											>
+												-
+											</button>
+											<Button
+												className="flex-grow"
+												style={{ height: '48px', width: '200px' }}
+												disabled={!isSDKLoaded || isPendingToken1 || mintClosed}
+												onClick={async () => {
+													handleButtonClick();
+													setIsPendingToken1(true);
+													if (!account) {
+														alert("Minting failed: No account connected");
+														return;
+													}
+
+													if (wallet.getChain()?.id !== chain.id) {
+														await wallet.switchChain(chain);
+													}
+
+													const contract = getContract({
+														client: ThirdwebClient,
+														chain,
+														address: CONTRACT_ADDRESS,
+													});
+
+													const transaction = claimTo({
+														contract,
+														to: account.address,
+														tokenId: PAID_MINT_TOKEN_ID,
+														quantity: mintQuantity,
+													});
+
+													sendTransaction(transaction, {
+														onSuccess: async (data: TransactionResult) => {
+															setTransactionResultToken1(data);
+															setTransactionResultToken0(null);
+															console.log(`Transaction successful with hash: ${data.transactionHash}`);
+															setIsHDChecked(true);
+															await sdk.haptics.impactOccurred('heavy');
+															launchConfetti();
+														},
+														onError: (error: Error) => {
+															setTransactionErrorToken1(error);
+															console.error("Transaction failed", error);
+														},
+														onSettled: () => {
+															setIsPendingToken1(false);
+														},
+													});
+												}}
+											>
+												{isPendingToken1 ? "Minting HD..." : `HD Mint ${(0.002 * Math.min(Number(mintQuantity), 5)).toFixed(3)}ETH`}
+											</Button>
+											<button
+												className="bg-gray-700 text-white flex-grow px-0 py-2 rounded text-xl"
+												style={{ height: '48px', width: '48px' }}
+												onClick={() => {
+													handleButtonClick();
+													setMintQuantity((prev) => prev < MAX_MINT_QUANTITY ? prev + BigInt(1) : prev);
+												}}
+												disabled={mintClosed}
+											>
+												+
+											</button>
+										</div>
+									) : (
+										<Button
+											className="flex-grow"
+											style={{ height: '48px'}}
+											disabled={!isSDKLoaded || isPendingToken0 || mintClosed}
+											onClick={async () => {
+												handleButtonClick();
+												if (!userLikedCast && !isCheckingLikeStatus) {
+													setIsCheckingLikeStatus(true);
+													await sdk.actions.openUrl(LIKE_CAST_URL);
+													return;
+												}
+												if (isCheckingLikeStatus) {
+
+													// Re-check the like status
+													const result = await checkUserLikedCast(TARGET_HASH, TARGET_FID, FID);
+													setUserLikedCast(result?.data?.reactionBody?.type === 'REACTION_TYPE_LIKE' ? true : false);
+													setIsCheckingLikeStatus(false);
+													return;
+												}
+												setIsPendingToken0(true);
+												if (!account) {
+													alert("Minting failed: No account connected");
+													return;
+												}
+
+												if (wallet.getChain()?.id !== chain.id) {
+													await wallet.switchChain(chain);
+												}
+
+												const contract = getContract({
+													client: ThirdwebClient,
+													chain,
+													address: CONTRACT_ADDRESS,
+												});
+
+												const transaction = claimTo({
+													contract,
+													to: account.address,
+													tokenId: FREE_MINT_TOKEN_ID,
+													quantity: mintQuantity,
+												});
+
+												sendTransaction(transaction, {
+													onSuccess: async (data: TransactionResult) => {
+														setTransactionResultToken0(data);
+														setTransactionResultToken1(null);
+														console.log(`Transaction successful with hash: ${data.transactionHash}`);
+														setIsHDChecked(true);
+														await sdk.haptics.impactOccurred('heavy');
+														launchConfetti();
+													},
+													onError: (error: Error) => {
+														setTransactionErrorToken0(error);
+														console.error("Transaction failed", error);
+													},
+													onSettled: () => {
+														setIsPendingToken0(false);
+													},
+												});
 											}}
 										>
-											{transactionResultToken0.transactionHash.slice(0, 6)}...
-											{transactionResultToken0.transactionHash.slice(-4)}
-										</a>
-									</p>
-									<button
-										className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
-										onClick={async () => {
-											if (!context) {
-												alert('Context is not initialized. Please try again later.');
-												return;
-											}
-											await sdk.actions.composeCast({ 
-												"text": "I just minted WeCastPro from @chriscocreated - all 10k Pro + the FC team in the arch",
-												"embeds": [LIKE_CAST_URL, "https://mint-frame-we-cast-pro.vercel.app"]
-											});
-										}}
-									>
-										Share
-									</button>
-								</>
-							)}
-							{transactionErrorToken1 && (
-								<p className="text-red-500">
-									{transactionErrorToken1.message}
-								</p>
-							)}
-							{transactionResultToken1 && (
-								<>
-									<p className="text-green-500">
-										Success:{" "}
-										<a
-											href="#"
-											onClick={(e) => {
-												e.preventDefault();
-												openTransactionUrl(transactionResultToken1.transactionHash);
-											}}
-										>
-											{transactionResultToken1.transactionHash.slice(0, 6)}...
-											{transactionResultToken1.transactionHash.slice(-4)}
-										</a>
-									</p>
-									<button
-										className="bg-purple-500 text-white px-4 py-2 rounded mt-1"
-										onClick={async () => {
-											sdk.actions.openUrl('https://ipfs.io/ipfs/QmV67MbiP3c3ADTKK9FyCEr7Gcwdh3JrR68t1fKJsMYvGT/0.jpeg');
-										}}
-									>
-										View Your Art
-									</button>
-									<button
-										className="bg-blue-500 text-white px-4 py-2 rounded mt-1"
-										onClick={async () => {
-											if (!context) {
-												alert('Context is not initialized. Please try again later.');
-												return;
-											}
-											await sdk.actions.composeCast({ 
-												"text": "I just minted WeCastPro HD from @chriscocreated - all 10k Pro + the FC team in the arch - in High Definition",
-												"embeds": [LIKE_CAST_URL, "https://mint-frame-we-cast-pro.vercel.app"]
-											});
-										}}
-									>
-										Share
-									</button>
+											{isPendingToken0 ? "Minting SD..." : isCheckingLikeStatus ? "Yes - I've liked the cast" : userLikedCast === true ? "FreeMint SD" : "Like Cast to Mint SD"}
+										</Button>
+									)}
+									{transactionErrorToken0 && (
+										<p className="text-red-500">
+											{transactionErrorToken0.message}
+										</p>
+									)}
+									{transactionResultToken0 && (
+										<>
+											<p className="text-green-500">
+												Success: {" "}
+												<a
+													href="#"
+													onClick={(e) => {
+														e.preventDefault();
+														openTransactionUrl(transactionResultToken0.transactionHash);
+													}}
+												>
+													{transactionResultToken0.transactionHash.slice(0, 6)}...
+													{transactionResultToken0.transactionHash.slice(-4)}
+												</a>
+											</p>
+											<button
+												className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+												onClick={async () => {
+													if (!context) {
+														alert('Context is not initialized. Please try again later.');
+														return;
+													}
+													await sdk.actions.composeCast({ 
+														"text": "I just minted WeCastPro from @chriscocreated - all 10k Pro + the FC team in the arch",
+														"embeds": [LIKE_CAST_URL, "https://mint-frame-we-cast-pro.vercel.app"]
+													});
+												}}
+											>
+												Share
+											</button>
+										</>
+									)}
+									{transactionErrorToken1 && (
+										<p className="text-red-500">
+											{transactionErrorToken1.message}
+										</p>
+									)}
+									{transactionResultToken1 && (
+										<>
+											<p className="text-green-500">
+												Success: {" "}
+												<a
+													href="#"
+													onClick={(e) => {
+														e.preventDefault();
+														openTransactionUrl(transactionResultToken1.transactionHash);
+													}}
+												>
+													{transactionResultToken1.transactionHash.slice(0, 6)}...
+													{transactionResultToken1.transactionHash.slice(-4)}
+												</a>
+											</p>
+											<button
+												className="bg-purple-500 text-white px-4 py-2 rounded mt-1"
+												onClick={async () => {
+													sdk.actions.openUrl('https://ipfs.io/ipfs/QmV67MbiP3c3ADTKK9FyCEr7Gcwdh3JrR68t1fKJsMYvGT/0.jpeg');
+												}}
+											>
+												View Your Art
+											</button>
+											<button
+												className="bg-blue-500 text-white px-4 py-2 rounded mt-1"
+												onClick={async () => {
+													if (!context) {
+														alert('Context is not initialized. Please try again later.');
+														return;
+													}
+													await sdk.actions.composeCast({ 
+														"text": "I just minted WeCastPro HD from @chriscocreated - all 10k Pro + the FC team in the arch - in High Definition",
+														"embeds": [LIKE_CAST_URL, "https://mint-frame-we-cast-pro.vercel.app"]
+													});
+												}}
+											>
+												Share
+											</button>
+										</>
+									)}
 								</>
 							)}
 						</>
