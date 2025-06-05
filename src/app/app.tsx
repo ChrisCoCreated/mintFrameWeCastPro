@@ -261,7 +261,17 @@ export default function App() {
 						</div>
 					</div>
 					{mintClosed ? (
-						<p className="text-red-500">Mint Closed</p>
+						<div className="text-center">
+							<p className="text-red-500">Mint Closed</p>
+							<a
+								href="https://opensea.io/collection/wecast-7"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-blue-500 underline"
+							>
+								View on OpenSea
+							</a>
+						</div>
 					) : (
 						<>
 							{!wallet ? (
